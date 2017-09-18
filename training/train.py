@@ -194,8 +194,8 @@ if __name__ == "__main__":
         raise Exception("Please specify stage by --stage=pnet or rnet or onet")
     dataPath = os.path.join(rootPath, "tmp/data/%s"%(args.stage))
     modelPrefix = os.path.join(rootPath, "tmp/model/%s/%s"%(args.stage, args.stage))
-    if not os.path.isdir(modelPrefix):
-        os.makedirs(modelPrefix)
+    if not os.path.isdir(os.path.dirname(modelPrefix)):
+        os.makedirs(os.path.dirname(modelPrefix))
     
     _net = {'pnet': P_Net, 'rnet': R_Net, 'onet': O_Net}
     train(_net[args.stage], modelPrefix, args.epoch, dataPath, display=args.display, baseLr=args.lr, gpus=args.gpus)
